@@ -11,7 +11,7 @@ class GildedRoseTest {
     Item element = new Item("foo", 0, 0);
     GildedRose app = new GildedRose(new Item[] {element});
     app.updateQuality();
-    assertEquals("FIXME", element.name, "the name changed");
+    assertEquals("foo", element.name, "the name changed");
   }
 
 }
