@@ -68,25 +68,24 @@ void testDecreasingFunction() {
  @DisplayName("Test the quality system of Backstage Passes")
 
  void testPassesQuality() {
-    if(element.name.equals("Backstage passes to a TAFKAL80ETC concert")){
-      for(int expDate = 0; expDate <= 11; expDate++){
-        Item element = new Item("Backstage passes to a TAFKAL80ETC concert", expDate, 17);
+    for(int expDate = 0; expDate <= 11; expDate++){
+      Item element = new Item("Backstage passes to a TAFKAL80ETC concert", expDate, 17);
     
-       GildedRose app = new GildedRose(new Item[] {element});
-        app.updateQuality();
+      GildedRose app = new GildedRose(new Item[] {element});
+      app.updateQuality();
 
-        if(expDate == 0){
-          assertEquals(0, element.quality, "The concert is over");
-        }
-        else if(expDate <= 5){
-         assertEquals(20, element.quality, "The concert is very near");
-        }
-        else if(expDate <=10){
-         assertEquals(19, element.quality, "The concert is near");
-        }
-        else{
-         assertEquals(18, element.quality,"the concert is far ahead");
-        }
+      if(expDate == 0){
+        assertEquals(0, element.quality, "The concert is over");
+      }
+      else if(expDate <= 5){
+        assertEquals(20, element.quality, "The concert is very near");
+      }
+      else if(expDate <=10){
+        assertEquals(19, element.quality, "The concert is near");
+      }
+      else{
+        assertEquals(18, element.quality,"the concert is far ahead");
       }
     }
-  } 
+  }
+}
