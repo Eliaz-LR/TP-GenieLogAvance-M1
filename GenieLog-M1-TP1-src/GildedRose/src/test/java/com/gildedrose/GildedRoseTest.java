@@ -13,6 +13,9 @@ class GildedRoseTest {
     app.updateQuality();
     assertEquals("foo", element.name, "the name changed");
   }
+
+
+  // 2 tests (minimum) mais 3 pour vérifier l'évolution du sellIn
   @Test
   @DisplayName("On gère d'abord les comportements des items normaux")
   /*
@@ -20,6 +23,7 @@ class GildedRoseTest {
    * Si SellIn < 0 alors un objet se dégrade 2x plus vite.
    * La qualité est comprise entre 0 et 50 
    */
+
   void testBasicItem(){
     Item element = new Item("foo", 1, 8);
     GildedRose app = new GildedRose(new Item[] {element});
@@ -29,19 +33,12 @@ class GildedRoseTest {
     assertEquals(7, element.quality, "quality decreasing test");
 
     app.updateQuality();
-    assertEquals(-1, element.sellIn, "negative sellIn normal test");
     assertEquals(5, element.quality, "negative sellIn / decreasing quality double");
   
-    element.quality = 1;
-    app.updateQuality();
-    assertEquals(0, element.quality, "quality negativity test");
-
-    element.quality = 0;
-    app.updateQuality();
-    assertEquals(0, element.quality, "quality negativity test");
-    
 
   }
+
+  /// 4 Tests
   @Test
   @DisplayName("Test the quality system of Backstage Passes")
 
@@ -71,56 +68,24 @@ class GildedRoseTest {
           app.updateQuality();
           assertEquals(0, element.quality, "The concert is over");
 
-          app48.updateQuality();
-          assertEquals(0, element48.quality, "The concert is over");
-
-          app49.updateQuality();
-          assertEquals(0, element49.quality, "The concert is over");
-
-          appMax.updateQuality();
-          assertEquals(0, elementMax.quality, "the concert is over max qual");
-
-
         }
         else if(expDate <= 5){
-        app.updateQuality();
-        assertEquals(20, element.quality, "The concert is very near"); 
 
-        app48.updateQuality();
-        assertEquals(50, element48.quality, "The concert is over");
+          app48.updateQuality();
+          assertEquals(50, element48.quality, "The concert is over");
           
-        app49.updateQuality();
-        assertEquals(50, element49.quality, "The concert is over");
-
-        appMax.updateQuality();
-        assertEquals(50, elementMax.quality, "the concert is over max qual");
 
         }
         else if(expDate <=10){
-        app.updateQuality();
-        assertEquals(19, element.quality, "The concert is near");
 
-        app48.updateQuality();
-        assertEquals(50, element48.quality, "The concert is over");
-
-        app49.updateQuality();
+          app49.updateQuality();
           assertEquals(50, element49.quality, "The concert is over");
 
-        appMax.updateQuality();
-        assertEquals(50, elementMax.quality, "the concert is over max qual");
         }
         else{
-        app.updateQuality();
-        assertEquals(18, element.quality,"the concert is far ahead");
 
-        app48.updateQuality();
-        assertEquals(49, element48.quality, "The concert is over");
-
-        app49.updateQuality();
+          app49.updateQuality();
           assertEquals(50, element49.quality, "The concert is over");
-
-        appMax.updateQuality();
-        assertEquals(50, elementMax.quality, "the concert is over max qual");
 
         }
       }
@@ -128,6 +93,9 @@ class GildedRoseTest {
     }
 
   @Test
+
+  //3 Tests qu'on peut réduire à 2
+
   @DisplayName("Test the property of Sulfuras")
   void testSulfurasProperty() {
     
@@ -140,10 +108,10 @@ class GildedRoseTest {
     element.sellIn = -10;
     app.updateQuality();
     assertEquals(80, element.quality, "contraint value sulfuras (neg) test");
-    assertEquals(-10, element.sellIn, "fixed sellIn test");
-
   }
 
+
+  //4 Test
   @Test
   @DisplayName("Test the property of Aged Brie")
   void testAgedBrie(){
@@ -153,10 +121,6 @@ class GildedRoseTest {
     assertEquals(41, element.quality, "quality increasing brie test");
 
     element.quality = 49;
-    app.updateQuality();
-    assertEquals(50, element.quality, "max quality brie test");
-
-    element.quality = 50;
     app.updateQuality();
     assertEquals(50, element.quality, "max quality brie test");
 
