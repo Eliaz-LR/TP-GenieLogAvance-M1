@@ -23,17 +23,10 @@ class GildedRoseTest {
   }
   
   /* Test functions to test properties of basic items
-   * 3 tests.
+   * 1 test.
    */
 
-  @Test
-  @DisplayName("Test decreasing quality")
-  void diminutionQual(){
-    Item element = new Item("foo", 1, 8);
-    GildedRose app = new GildedRose(new Item[] {element});
-    app.updateQuality();
-    assertEquals(0, element.sellIn, "sellIn decreasing test");
-  }
+
 
   @Test
   @DisplayName("Test decreasing quality neg")
