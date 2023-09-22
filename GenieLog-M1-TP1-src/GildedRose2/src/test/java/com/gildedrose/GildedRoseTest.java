@@ -95,6 +95,44 @@ class GildedRoseTest {
     assertEquals(50, element.quality, "50 quality test (backstage)");
   }
 
+  //Test ajouté
+  @Test
+  @DisplayName(
+    "Test passes when quality is equal to 11"
+  )
+  void PassesWith11Quality() {
+    Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 11, 25);
+    GildedRose app = new GildedRose(new Item[] { element });
+    app.updateQuality();
+    assertEquals(26, element.quality, "11 quality test (backstage)");
+  }
+
+
+  @Test
+  @DisplayName(
+    "Test when the equality os equal to 6"
+  )
+  void NearPassesWith6Quality() {
+    Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 6, 25);
+    GildedRose app = new GildedRose(new Item[] { element });
+    app.updateQuality();
+    assertEquals(27, element.quality, "6 quality test (backstage)");
+  }
+
+
+
+  @Test
+  @DisplayName(
+    "Test passes when quality is equal to -12"
+  )
+  void PassedPassesWithQualityFixed() {
+    Item element = new Item("Backstage passes to a TAFKAL80ETC concert", -12, 25);
+    GildedRose app = new GildedRose(new Item[] { element });
+    app.updateQuality();
+    assertEquals(0, element.quality, "11 quality test (backstage)");
+  }
+
+  
   @Test
   @DisplayName(
     "Test passes when quality is near 49 and sellIn and superior to 10"
@@ -105,6 +143,7 @@ class GildedRoseTest {
     app.updateQuality();
     assertEquals(50, element.quality, "50 quality test (backstage)");
   }
+
 
 
   /* Test functions to test properties of the special item:
