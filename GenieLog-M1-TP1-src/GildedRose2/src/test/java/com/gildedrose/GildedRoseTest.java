@@ -27,14 +27,46 @@ class GildedRoseTest {
    * 1 test.
    */
 
+   @Test
+   @DisplayName("Test decreasing quality ")
+   void diminutionsQual() {
+     Item element = new Item("foo", 1, 7);
+     GildedRose app = new GildedRose(new Item[] { element });
+     app.updateQuality();
+     assertEquals(6, element.quality, "quality decreasing test");
+   }
+
   @Test
   @DisplayName("Test decreasing quality neg")
   void diminutionsNegQual() {
     Item element = new Item("foo", 0, 7);
     GildedRose app = new GildedRose(new Item[] { element });
     app.updateQuality();
-    assertEquals(5, element.quality, "sellIn decreasing test");
+    assertEquals(5, element.quality, "quality decreasing test neg");
   }
+
+  @Test
+  @DisplayName("Test decreasing quality ")
+  void diminutionsQual2() {
+    Item element = new Item("foo", 1, 0);
+    GildedRose app = new GildedRose(new Item[] { element });
+    app.updateQuality();
+    assertEquals(0, element.quality, "quality decreasing test");
+  }
+
+  @Test
+  @DisplayName("Test decreasing quality ")
+  void diminutionsQual3() {
+    Item element = new Item("foo", -1, 0);
+    GildedRose app = new GildedRose(new Item[] { element });
+    app.updateQuality();
+    assertEquals(0, element.quality, "quality decreasing test");
+  }
+
+
+
+
+
 
   /* Test functions to test properties of the special item:
    * "backstage passes to a TAFKAL80ETC concert"
@@ -59,6 +91,8 @@ class GildedRoseTest {
     assertEquals(50, element.quality, "50 quality test (backstage)");
   }
 
+
+
   @Test
   @DisplayName(
     "Test passes when quality is near 49 and sellIn between 6 and 10"
@@ -75,15 +109,12 @@ class GildedRoseTest {
     "Test passes when quality is near 49 and sellIn and superior to 10"
   )
   void PassesWithHighQuality() {
-    Item element = new Item(
-      "Backstage passes to a TAFKAL80ETC concert",
-      12,
-      49
-    );
+    Item element = new Item("Backstage passes to a TAFKAL80ETC concert",12,49);
     GildedRose app = new GildedRose(new Item[] { element });
     app.updateQuality();
     assertEquals(50, element.quality, "50 quality test (backstage)");
   }
+
 
   /* Test functions to test properties of the special item:
    * "Sulfuras, Hand of Ragnaros"
