@@ -28,7 +28,7 @@ class GildedRoseTest {
    */
 
    @Test
-   @DisplayName("Test decreasing quality ")
+   @DisplayName("Test decreasing quality")
    void diminutionsQual() {
      Item element = new Item("foo", 1, 7);
      GildedRose app = new GildedRose(new Item[] { element });
@@ -53,11 +53,6 @@ class GildedRoseTest {
     app.updateQuality();
     assertEquals(0, element.quality, "quality 0 test (neg)");
   }
-
-
-
-
-
 
   /* Test functions to test properties of the special item:
    * "backstage passes to a TAFKAL80ETC concert"
@@ -92,9 +87,7 @@ class GildedRoseTest {
   }
 
   @Test
-  @DisplayName(
-    "Test passes when quality is near 49 and sellIn between 6 and 10"
-  )
+  @DisplayName("Test passes when quality is near 49 and sellIn between 6 and 10")
   void NearPassesWithHighQuality() {
     Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 8, 49);
     GildedRose app = new GildedRose(new Item[] { element });
@@ -112,9 +105,7 @@ class GildedRoseTest {
   }
 
   @Test
-  @DisplayName(
-    "Test when the equality or equal to 6"
-  )
+  @DisplayName("Test when the equality or equal to 6")
   void NearPassesWith6Quality() {
     Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 6, 25);
     GildedRose app = new GildedRose(new Item[] { element });
@@ -123,9 +114,7 @@ class GildedRoseTest {
   }
 
   @Test
-  @DisplayName(
-    "Test passes when quality is equal to -12"
-  )
+  @DisplayName("Test passes when quality is equal to -12")
   void PassedPassesWithQualityFixed() {
     Item element = new Item("Backstage passes to a TAFKAL80ETC concert", -12, 25);
     GildedRose app = new GildedRose(new Item[] { element });
@@ -134,9 +123,7 @@ class GildedRoseTest {
   }
 
   @Test
-  @DisplayName(
-    "Test passes when quality is near 49 and sellIn and superior to 10"
-  )
+  @DisplayName("Test passes when quality is near 49 and sellIn and superior to 10")
   void PassesWithHighQuality() {
     Item element = new Item("Backstage passes to a TAFKAL80ETC concert",12,49);
     GildedRose app = new GildedRose(new Item[] { element });
