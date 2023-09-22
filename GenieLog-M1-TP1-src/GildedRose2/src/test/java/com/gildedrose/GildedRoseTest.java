@@ -74,6 +74,20 @@ class GildedRoseTest {
   }
 
   @Test
+  @DisplayName(
+    "Test passes when sellIn < 5"
+  )
+  void VeryNearPasses() {
+    Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 3, 25);
+    GildedRose app = new GildedRose(new Item[] { element });
+    app.updateQuality();
+    assertEquals(28, element.quality, "very near quality test (backstage)");
+  }
+
+  
+
+
+  @Test
   @DisplayName("Test passes when quality is 48 and sellIn between 1 and 5")
   void VeryNearPassesWithHighQuality() {
     Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 3, 48);
@@ -110,7 +124,7 @@ class GildedRoseTest {
 
   @Test
   @DisplayName(
-    "Test when the equality os equal to 6"
+    "Test when the equality or equal to 6"
   )
   void NearPassesWith6Quality() {
     Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 6, 25);
@@ -143,6 +157,8 @@ class GildedRoseTest {
     app.updateQuality();
     assertEquals(50, element.quality, "50 quality test (backstage)");
   }
+
+
 
 
 
