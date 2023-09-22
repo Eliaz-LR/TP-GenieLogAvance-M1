@@ -61,7 +61,7 @@ class GildedRoseTest {
 
   /* Test functions to test properties of the special item:
    * "backstage passes to a TAFKAL80ETC concert"
-   * 4 tests.
+   * 7 tests.
    */
 
   @Test
@@ -74,18 +74,13 @@ class GildedRoseTest {
   }
 
   @Test
-  @DisplayName(
-    "Test passes when sellIn < 5"
-  )
+  @DisplayName("Test passes when sellIn < 5")
   void VeryNearPasses() {
     Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 3, 25);
     GildedRose app = new GildedRose(new Item[] { element });
     app.updateQuality();
     assertEquals(28, element.quality, "very near quality test (backstage)");
   }
-
-  
-
 
   @Test
   @DisplayName("Test passes when quality is 48 and sellIn between 1 and 5")
@@ -95,8 +90,6 @@ class GildedRoseTest {
     app.updateQuality();
     assertEquals(50, element.quality, "50 quality test (backstage)");
   }
-
-
 
   @Test
   @DisplayName(
@@ -109,18 +102,14 @@ class GildedRoseTest {
     assertEquals(50, element.quality, "50 quality test (backstage)");
   }
 
-  //Test ajouté
   @Test
-  @DisplayName(
-    "Test passes when quality is equal to 11"
-  )
+  @DisplayName("Test passes when quality is equal to 11")
   void PassesWith11Quality() {
     Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 11, 25);
     GildedRose app = new GildedRose(new Item[] { element });
     app.updateQuality();
     assertEquals(26, element.quality, "11 quality test (backstage)");
   }
-
 
   @Test
   @DisplayName(
@@ -133,8 +122,6 @@ class GildedRoseTest {
     assertEquals(27, element.quality, "6 quality test (backstage)");
   }
 
-
-
   @Test
   @DisplayName(
     "Test passes when quality is equal to -12"
@@ -146,7 +133,6 @@ class GildedRoseTest {
     assertEquals(0, element.quality, "11 quality test (backstage)");
   }
 
-  
   @Test
   @DisplayName(
     "Test passes when quality is near 49 and sellIn and superior to 10"
@@ -157,9 +143,6 @@ class GildedRoseTest {
     app.updateQuality();
     assertEquals(50, element.quality, "50 quality test (backstage)");
   }
-
-
-
 
 
   /* Test functions to test properties of the special item:
