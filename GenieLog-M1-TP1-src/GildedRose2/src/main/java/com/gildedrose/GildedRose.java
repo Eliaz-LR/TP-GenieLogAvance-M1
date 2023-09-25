@@ -13,8 +13,8 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-
-            //Traitement avant mis-à-jour du sellIn
+            
+            //Traitement avant la mis-à-jour de la date d'expiration
             beforeSellInUpdate(i);
 
             //Diminue la date d'expiration si l'item n'est pas Sulfuras
@@ -22,19 +22,22 @@ class GildedRose {
                 items[i].sellIn -= 1;
             }
 
-            //Traitement après mis-à-jour du sellIn
+            //Traitement après mis-à-jour de la date d'expiration
             afterSellInUpdate(i);
 
         }
     }
 
+    //Traitement avant mis-à-jour de la date d'expiration
     private void beforeSellInUpdate(int i){
-        //Traitement avant mis-à-jour du sellIn
+        
+
         if (!items[i].name.equals(brie) && !items[i].name.equals(backstage)) {
-            if (items[i].quality > 0 && !items[i].name.equals(sulfuras)) {
+            if (!items[i].name.equals(sulfuras) && items[i].quality > 0) {
                 
                 items[i].quality -= 1;
             }
+
         } else {
             if (items[i].quality < 50) {
                 
@@ -55,27 +58,25 @@ class GildedRose {
         }
     } 
 
+    //Traitement après mis-à-jour de la date d'expiration
     private void afterSellInUpdate(int i){
 
-        //Traitement après mis-à-jour du sellIn
         if (items[i].sellIn < 0) {
+         
             if (!items[i].name.equals(brie)) {
+             
                 if (!items[i].name.equals(backstage)) {
+                  
                     if (items[i].quality > 0 && !items[i].name.equals(sulfuras)) {
-                        if (!items[i].name.equals(sulfuras)) {
-                            items[i].quality -= 1;
-                        }
+                            
+                        items[i].quality -= 1;
                     }
                 } else {
                     items[i].quality = 0;
                 }
-            } else {
-                if (items[i].quality < 50) {
-                    items[i].quality += 1;
-                }
+            } else if(items[i].quality < 50){
+                items[i].quality += 1;
             }
         }
-
     }
-
 }
