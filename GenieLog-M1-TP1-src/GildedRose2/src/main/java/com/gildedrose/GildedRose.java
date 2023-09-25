@@ -15,12 +15,11 @@ class GildedRose {
         for (int i = 0; i < items.length; i++) {
             
             beforeSellInUpdate(i);
-
-            //Diminue la date d'expiration si l'item n'est pas Sulfuras
+            
             if (!items[i].name.equals(sulfuras)) {
                 items[i].sellIn -= 1;
             }
-
+            
             afterSellInUpdate(i);
 
         }
@@ -36,19 +35,18 @@ class GildedRose {
                 
                 items[i].quality += 1;
 
-                if (items[i].name.equals(backstage)) {
-                    if (items[i].sellIn < 11 && items[i].quality < 50) {
+            } if (items[i].name.equals(backstage)) {
+                
+                if (items[i].sellIn < 11 && items[i].quality < 50) {
                             
-                        items[i].quality += 1;
-                    }
+                    items[i].quality += 1;
+                }
 
-                    if (items[i].sellIn < 6 && items[i].quality < 50) {
+                if (items[i].sellIn < 6 && items[i].quality < 50) {
                             
-                        items[i].quality += 1;
-                    }
+                    items[i].quality += 1;
                 }
             }
-
 
         } else if (!items[i].name.equals(sulfuras) && items[i].quality > 0) {
                 
