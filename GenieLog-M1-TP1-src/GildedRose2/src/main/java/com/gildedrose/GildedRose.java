@@ -50,15 +50,11 @@ class GildedRose {
             }
 
 
-        } else {
-
-            if (!items[i].name.equals(sulfuras) && items[i].quality > 0) {
+        } else if (!items[i].name.equals(sulfuras) && items[i].quality > 0) {
                 
-                items[i].quality -= 1;
-            }
-            
-            
-        }
+            items[i].quality -= 1;
+
+        } 
     } 
 
     //Traitement après mis-à-jour de la date d'expiration
@@ -72,19 +68,15 @@ class GildedRose {
                     items[i].quality += 1;
                 
                 }
-            } else{
-
-                if (items[i].name.equals(backstage)) {
+            } else if (items[i].name.equals(backstage)) {
                   
-                    items[i].quality = 0;
+                items[i].quality = 0;
 
-                } else {
-                    if (items[i].quality > 0 && !items[i].name.equals(sulfuras)) {
+            } else if (items[i].quality > 0 && !items[i].name.equals(sulfuras)) {
                             
-                        items[i].quality -= 1;
-                    }
-                }
-            }
+                items[i].quality -= 1;
+                
+            } 
         }
     }
 }
