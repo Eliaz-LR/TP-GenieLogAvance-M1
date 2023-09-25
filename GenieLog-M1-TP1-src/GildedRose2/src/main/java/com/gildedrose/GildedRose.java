@@ -3,6 +3,10 @@ package com.gildedrose;
 class GildedRose {
     Item[] items;
 
+    static public String sulfuras = "Sulfuras, Hand of Ragnaros";
+    static public String backstage = "Backstage passes to a TAFKAL80ETC concert";
+    static public String brie = "Aged Brie";
+
     public GildedRose(Item[] items) {
         this.items = items;
     }
@@ -14,7 +18,7 @@ class GildedRose {
             beforeSellInUpdate(i);
 
             //Diminue la date d'expiration si l'item n'est pas Sulfuras
-            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+            if (!items[i].name.equals(sulfuras)) {
                 items[i].sellIn -= 1;
             }
 
@@ -26,10 +30,9 @@ class GildedRose {
 
     private void beforeSellInUpdate(int i){
         //Traitement avant mis-à-jour du sellIn
-        if (!items[i].name.equals("Aged Brie")
-            && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+        if (!items[i].name.equals(brie) && !items[i].name.equals(backstage)) {
             if (items[i].quality > 0) {
-                if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                if (!items[i].name.equals(sulfuras)) {
                     items[i].quality -= 1;
                         
                 }
@@ -39,7 +42,7 @@ class GildedRose {
                 
                 items[i].quality += 1;
 
-                if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                if (items[i].name.equals(backstage)) {
                     if (items[i].sellIn < 11 && items[i].quality < 50) {
                             
                         items[i].quality += 1;
@@ -58,10 +61,10 @@ class GildedRose {
 
         //Traitement après mis-à-jour du sellIn
         if (items[i].sellIn < 0) {
-            if (!items[i].name.equals("Aged Brie")) {
-                if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+            if (!items[i].name.equals(brie)) {
+                if (!items[i].name.equals(backstage)) {
                     if (items[i].quality > 0) {
-                        if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                        if (!items[i].name.equals(sulfuras)) {
                             items[i].quality -= 1;
                         }
                     }
