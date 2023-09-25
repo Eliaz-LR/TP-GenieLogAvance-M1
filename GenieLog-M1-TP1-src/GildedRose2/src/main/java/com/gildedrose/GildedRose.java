@@ -31,11 +31,9 @@ class GildedRose {
     private void beforeSellInUpdate(int i){
         //Traitement avant mis-à-jour du sellIn
         if (!items[i].name.equals(brie) && !items[i].name.equals(backstage)) {
-            if (items[i].quality > 0) {
-                if (!items[i].name.equals(sulfuras)) {
-                    items[i].quality -= 1;
-                        
-                }
+            if (items[i].quality > 0 && !items[i].name.equals(sulfuras)) {
+                
+                items[i].quality -= 1;
             }
         } else {
             if (items[i].quality < 50) {
@@ -63,7 +61,7 @@ class GildedRose {
         if (items[i].sellIn < 0) {
             if (!items[i].name.equals(brie)) {
                 if (!items[i].name.equals(backstage)) {
-                    if (items[i].quality > 0) {
+                    if (items[i].quality > 0 && !items[i].name.equals(sulfuras)) {
                         if (!items[i].name.equals(sulfuras)) {
                             items[i].quality -= 1;
                         }
