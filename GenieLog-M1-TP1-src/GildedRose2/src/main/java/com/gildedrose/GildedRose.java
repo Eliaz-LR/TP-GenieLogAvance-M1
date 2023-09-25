@@ -30,13 +30,8 @@ class GildedRose {
     private void beforeSellInUpdate(int i){
         
 
-        if (!items[i].name.equals(brie) && !items[i].name.equals(backstage)) {
-            if (!items[i].name.equals(sulfuras) && items[i].quality > 0) {
-                
-                items[i].quality -= 1;
-            }
+        if (items[i].name.equals(brie) || items[i].name.equals(backstage)) {
 
-        } else {
             if (items[i].quality < 50) {
                 
                 items[i].quality += 1;
@@ -53,6 +48,16 @@ class GildedRose {
                     }
                 }
             }
+
+
+        } else {
+
+            if (!items[i].name.equals(sulfuras) && items[i].quality > 0) {
+                
+                items[i].quality -= 1;
+            }
+            
+            
         }
     } 
 
