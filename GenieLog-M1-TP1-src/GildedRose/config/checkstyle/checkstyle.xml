@@ -7,14 +7,13 @@
 <module name="Checker">
     <property name="charset" value="UTF-8"/>
     <property name="severity" value="warning"/>
-    <property name="fileExtensions" value="java, properties, xml"/>
 
     <!-- <module name="SuppressionFilter"> -->
     <!--   <property name="file" value="${checkstyleConfigDir}/suppressions.xml"/> -->
     <!-- </module> -->
 
     <!-- Checks that all packages have package documentation -->
-    <!-- <module name="JavadocPackage"/> -->
+    <module name="JavadocPackage"/>
 
     <!-- Checks whether files end with a new line.                        -->
     <!-- See http://checkstyle.sf.net/config_misc.html#NewlineAtEndOfFile -->
@@ -41,6 +40,7 @@
        <property name="message" value="Line has trailing spaces."/>
     </module>
 
+
     <!-- See http://checkstyle.sf.net/config_sizes.html -->
     <module name="LineLength">
         <property name="max" value="120"/>
@@ -61,15 +61,7 @@
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
         <module name="JavadocMethod">
             <property name="scope" value="public"/>
-            <property name="validateThrows" value="true"/>
         </module>
-        <module name="JavadocMissingLeadingAsterisk"/>
-        <module name="JavadocMissingWhitespaceAfterAsterisk"/>
-        <module name="JavadocParagraph"/>
-        <module name="JavadocStyle">
-            <property name="scope" value="public"/>
-        </module>
-        <module name="JavadocTagContinuationIndentation"/>
         <module name="JavadocType">
             <property name="scope" value="public"/>
         </module>
@@ -93,6 +85,7 @@
         <module name="ParameterName"/>
         <module name="StaticVariableName"/>
         <module name="TypeName"/>
+
 
 
         <!-- Checks for imports                              -->
@@ -122,13 +115,7 @@
         <module name="ParenPad"/>
         <module name="TypecastParenPad"/>
         <module name="WhitespaceAfter"/>
-        <module name="WhitespaceAround">
-            <property name="allowEmptyConstructors" value="true"/>
-            <property name="allowEmptyLambdas" value="true"/>
-            <property name="allowEmptyMethods" value="true"/>
-            <property name="allowEmptyTypes" value="true"/>
-            <property name="allowEmptyLoops" value="true"/>
-        </module>
+        <module name="WhitespaceAround"/>
 
 
         <!-- Modifier Checks                                    -->
@@ -142,9 +129,7 @@
         <module name="AvoidNestedBlocks"/>
         <module name="EmptyBlock"/>
         <module name="EmptyCatchBlock"/>
-        <module name="NeedBraces">
-            <property name="allowSingleLineStatement" value="true" />
-        </module>
+        <module name="NeedBraces"/>
         <module name="LeftCurly"/>
         <module name="RightCurly"/>
 
@@ -161,15 +146,11 @@
         <module name="ExplicitInitialization"/>
         <module name="FallThrough"/>
         <module name="FinalLocalVariable"/>
-        <module name="HiddenField">
-            <property name="ignoreConstructorParameter" value="true" />
-            <property name="ignoreSetter" value="true" />
-            <property name="setterCanReturnItsClass" value="true" />
-        </module>
+        <module name="HiddenField"/>
+        <module name="IllegalCatch"/>
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
         <module name="IllegalThrows"/>
-        <module name="IllegalCatch"/>
         <module name="IllegalToken"/>
         <module name="InnerAssignment"/>
         <!-- <module name="MagicNumber"/> -->
@@ -211,7 +192,7 @@
         <module name="DesignForExtension"/>
         <module name="FinalClass"/>
         <module name="HideUtilityClassConstructor"/>
-        <!-- <module name="InnerTypeLast"/> -->
+        <module name="InnerTypeLast"/>
         <module name="InterfaceIsType"/>
         <module name="MutableException"/>
         <module name="OneTopLevelClass"/>
