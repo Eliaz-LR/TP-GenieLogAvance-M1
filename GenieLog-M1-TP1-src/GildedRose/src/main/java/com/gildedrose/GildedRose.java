@@ -17,49 +17,41 @@ class GildedRose {
       Item item = items[i];
 
       if (!item.name.equals(sulfuras)) {
-        beforeSellInUpdate(item);
         item.sellIn -= 1;
-        afterSellInUpdate(item);
+        update(item);
         ensureQualityBounds(item);
       }
     }
   }
 
   //Traitement avant mis-à-jour de la date d'expiration
-  private void beforeSellInUpdate(Item item) {
+  private void update(Item item) {
+    boolean outOfDate = item.sellIn < 0;
     switch (item.name) {
       case brie:
         item.quality += 1;
+        if (outOfDate) {
+          item.quality += 1;
+        }
         break;
       case backstage:
-        if (item.sellIn < 6) {
+        if (item.sellIn < 5) {
           item.quality += 3;
-        } else if (item.sellIn < 11) {
+        } else if (item.sellIn < 10) {
           item.quality += 2;
         } else {
           item.quality += 1;
         }
+        if (outOfDate) {
+          item.quality = 0;
+        }
         break;
       default:
         item.quality -= 1;
-        break;
-    }
-  }
-
-  //Traitement après mis-à-jour de la date d'expiration
-  private void afterSellInUpdate(Item item) {
-    if (item.sellIn < 0) {
-      switch (item.name) {
-        case brie:
-          item.quality += 1;
-          break;
-        case backstage:
-          item.quality = 0;
-          break;
-        default:
+        if (outOfDate) {
           item.quality -= 1;
-          break;
-      }
+        }
+        break;
     }
   }
 
