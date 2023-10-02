@@ -27,14 +27,14 @@ class GildedRoseTest {
    * 3 tests.
    */
 
-   @Test
-   @DisplayName("Test decreasing quality")
-   void diminutionsQual() {
-     Item element = new Item("foo", 1, 7);
-     GildedRose app = new GildedRose(new Item[] { element });
-     app.updateQuality();
-     assertEquals(6, element.quality, "quality decreasing test");
-   }
+  @Test
+  @DisplayName("Test decreasing quality")
+  void diminutionsQual() {
+    Item element = new Item("foo", 1, 7);
+    GildedRose app = new GildedRose(new Item[] { element });
+    app.updateQuality();
+    assertEquals(6, element.quality, "quality decreasing test");
+  }
 
   @Test
   @DisplayName("Test decreasing quality neg")
@@ -87,7 +87,9 @@ class GildedRoseTest {
   }
 
   @Test
-  @DisplayName("Test passes when quality is near 49 and sellIn between 6 and 10")
+  @DisplayName(
+    "Test passes when quality is near 49 and sellIn between 6 and 10"
+  )
   void NearPassesWithHighQuality() {
     Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 8, 49);
     GildedRose app = new GildedRose(new Item[] { element });
@@ -98,7 +100,11 @@ class GildedRoseTest {
   @Test
   @DisplayName("Test passes when quality is equal to 11")
   void PassesWith11Quality() {
-    Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 11, 25);
+    Item element = new Item(
+      "Backstage passes to a TAFKAL80ETC concert",
+      11,
+      25
+    );
     GildedRose app = new GildedRose(new Item[] { element });
     app.updateQuality();
     assertEquals(26, element.quality, "11 quality test (backstage)");
@@ -116,21 +122,30 @@ class GildedRoseTest {
   @Test
   @DisplayName("Test passes when quality is equal to -12")
   void PassedPassesWithQualityFixed() {
-    Item element = new Item("Backstage passes to a TAFKAL80ETC concert", -12, 25);
+    Item element = new Item(
+      "Backstage passes to a TAFKAL80ETC concert",
+      -12,
+      25
+    );
     GildedRose app = new GildedRose(new Item[] { element });
     app.updateQuality();
     assertEquals(0, element.quality, "11 quality test (backstage)");
   }
 
   @Test
-  @DisplayName("Test passes when quality is near 49 and sellIn and superior to 10")
+  @DisplayName(
+    "Test passes when quality is near 49 and sellIn and superior to 10"
+  )
   void PassesWithHighQuality() {
-    Item element = new Item("Backstage passes to a TAFKAL80ETC concert",12,49);
+    Item element = new Item(
+      "Backstage passes to a TAFKAL80ETC concert",
+      12,
+      49
+    );
     GildedRose app = new GildedRose(new Item[] { element });
     app.updateQuality();
     assertEquals(50, element.quality, "50 quality test (backstage)");
   }
-
 
   /* Test functions to test properties of the special item:
    * "Sulfuras, Hand of Ragnaros"
@@ -167,5 +182,14 @@ class GildedRoseTest {
     GildedRose app = new GildedRose(new Item[] { element });
     app.updateQuality();
     assertEquals(50, element.quality, "negative increasing brie Test");
+  }
+
+  @Test
+  @DisplayName("Brie with sellIn > 0")
+  void testBrieSellIn() {
+    Item element = new Item("Aged Brie", 5, 8);
+    GildedRose app = new GildedRose(new Item[] { element });
+    app.updateQuality();
+    assertEquals(9, element.quality, "Brie with sellIn > 0");
   }
 }
