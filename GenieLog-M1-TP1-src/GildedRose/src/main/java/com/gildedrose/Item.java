@@ -18,15 +18,15 @@ public class Item {
   static final String backstage = "Backstage passes to a TAFKAL80ETC concert";
   static final String brie = "Aged Brie";
 
-  public void updateQuality() {
+  public void update() {
     if (!name.equals(sulfuras)) {
       sellIn -= 1;
-      update();
+      updateQuality();
       ensureQualityBounds();
     }
   }
 
-  private void update() {
+  private void updateQuality() {
     boolean outOfDate = sellIn < 0;
     switch (name) {
       case brie:
