@@ -15,14 +15,13 @@ class GildedRose {
   public void updateQuality() {
     for (int i = 0; i < items.length; i++) {
       Item item = items[i];
-      beforeSellInUpdate(item);
 
       if (!item.name.equals(sulfuras)) {
+        beforeSellInUpdate(item);
         item.sellIn -= 1;
+        afterSellInUpdate(item);
+        ensureQualityBounds(item);
       }
-
-      afterSellInUpdate(item);
-      ensureQualityBounds(item);
     }
   }
 
@@ -41,8 +40,6 @@ class GildedRose {
           item.quality += 1;
         }
         break;
-      case sulfuras:
-        break;
       default:
         item.quality -= 1;
         break;
@@ -59,8 +56,6 @@ class GildedRose {
         case backstage:
           item.quality = 0;
           break;
-        case sulfuras:
-          break;
         default:
           item.quality -= 1;
           break;
@@ -69,12 +64,10 @@ class GildedRose {
   }
 
   private void ensureQualityBounds(Item item) {
-    if (!item.name.equals(sulfuras)) {
-      if (item.quality < 0) {
-        item.quality = 0;
-      } else if (item.quality > 50) {
-        item.quality = 50;
-      }
+    if (item.quality < 0) {
+      item.quality = 0;
+    } else if (item.quality > 50) {
+      item.quality = 50;
     }
   }
 }
