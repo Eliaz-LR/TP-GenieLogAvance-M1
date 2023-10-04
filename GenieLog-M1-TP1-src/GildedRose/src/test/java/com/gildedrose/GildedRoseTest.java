@@ -163,7 +163,7 @@ class GildedRoseTest {
 
   /* Test functions to test properties of the special item:
    * "Aged Brie"
-   * 2 tests.
+   * 3 tests.
    */
 
   @Test
@@ -191,5 +191,25 @@ class GildedRoseTest {
     GildedRose app = new GildedRose(new Item[] { element });
     app.updateQuality();
     assertEquals(9, element.quality, "Brie with sellIn > 0");
+  }
+
+  // Test functions to test properties of "Conjured" items.
+
+  @Test
+  @DisplayName("Test decreasing quality positive sellIn")
+  void diminutionsQualConjured() {
+    Item element = new Item("Conjured", 1, 7);
+    GildedRose app = new GildedRose(new Item[] { element });
+    app.updateQuality();
+    assertEquals(5, element.quality, "quality decreasing test");
+  }
+
+  @Test
+  @DisplayName("Test decreasing quality negative sellIn")
+  void diminutionsNegQualConjured() {
+    Item element = new Item("Conjured", 0, 7);
+    GildedRose app = new GildedRose(new Item[] { element });
+    app.updateQuality();
+    assertEquals(3, element.quality, "quality decreasing test neg");
   }
 }

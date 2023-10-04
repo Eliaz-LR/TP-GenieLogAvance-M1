@@ -17,6 +17,7 @@ public class Item {
   static final String sulfuras = "Sulfuras, Hand of Ragnaros";
   static final String backstage = "Backstage passes to a TAFKAL80ETC concert";
   static final String brie = "Aged Brie";
+  static final String conjured = "Conjured";
 
   public void update() {
     if (!name.equals(sulfuras)) {
@@ -45,6 +46,12 @@ public class Item {
         }
         if (outOfDate) {
           quality = 0;
+        }
+        break;
+      case conjured:
+        quality -= 2;
+        if (outOfDate) {
+          quality -= 2;
         }
         break;
       default:
