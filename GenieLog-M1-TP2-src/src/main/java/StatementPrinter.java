@@ -4,14 +4,18 @@ import java.util.*;
 public class StatementPrinter {
 
   public String print(Invoice invoice, HashMap<String, Play> plays) {
+    // amount of money for this order
     float totalAmount = 0;
     int volumeCredits = 0;
-    String result = String.format("Statement for %s\n", invoice.customer);
+
+    StringBuffer buffer = new StringBuffer();
+    buffer.append(String.format("Statement for %s\n", invoice.customer));
 
     NumberFormat frmt = NumberFormat.getCurrencyInstance(Locale.US);
 
     for (Performance perf : invoice.performances) {
       Play play = plays.get(perf.playID);
+      // amount of money for this performance
       float thisAmount = 0;
 
       switch (play.type) {
@@ -39,17 +43,20 @@ public class StatementPrinter {
         Math.floor(perf.audience / 5);
 
       // print line for this order
-      result +=
+      buffer.append(
         String.format(
           "  %s: %s (%s seats)\n",
           play.name,
           frmt.format(thisAmount),
           perf.audience
-        );
+        )
+      );
       totalAmount += thisAmount;
     }
-    result += String.format("Amount owed is %s\n", frmt.format(totalAmount));
-    result += String.format("You earned %s credits\n", volumeCredits);
-    return result;
+    buffer.append(
+      String.format("Amount owed is %s\n", frmt.format(totalAmount))
+    );
+    buffer.append(String.format("You earned %s credits\n", volumeCredits));
+    return buffer.toString();
   }
 }
