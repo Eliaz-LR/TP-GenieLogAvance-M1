@@ -22,10 +22,10 @@ public class StatementPrinterTests {
                 new Performance(plays.get("as-like"), 35),
                 new Performance(plays.get("othello"), 40)));
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.print(invoice);
+        StringBuffer statementPrinter = new StringBuffer();
+        statementPrinter.append(invoice.print());
 
-        verify(result);
+        verify(statementPrinter);
     }
 
     @Test
@@ -39,9 +39,8 @@ public class StatementPrinterTests {
                 new Performance(plays.get("henry-v"), 53),
                 new Performance(plays.get("as-like"), 55)));
 
-        StatementPrinter statementPrinter = new StatementPrinter();
         Assertions.assertThrows(Error.class, () -> {
-            statementPrinter.print(invoice);
+            invoice.print();
         });
     }
 }
