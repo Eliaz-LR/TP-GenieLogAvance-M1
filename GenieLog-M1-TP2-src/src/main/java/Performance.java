@@ -12,28 +12,29 @@ public class Performance {
 
     float thisAmount = 0;
 
-    switch (this.pieceTh.type) {
-      case "tragedy":
+    var typePiece = this.pieceTh.type;
+
+    switch (typePiece) {
+      case tragedy:
         thisAmount = 400;
         if (this.audience > 30) {
           thisAmount += 10 * (this.audience - 30);
         }
         break;
-      case "comedy":
-        thisAmount = 300 + 3 * this.audience;
+
+      case comedy:
+        thisAmount = 300; 
+        thisAmount += 3 * this.audience;
         if (this.audience > 20) {
           thisAmount += 100 + 5 * (this.audience - 20);
         }
         
         break;
+
       default:
         throw new Error("unknown type: ${play.type}");
       }
 
       return thisAmount;
-
-
   }
-
-
 }

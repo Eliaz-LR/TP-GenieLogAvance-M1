@@ -30,7 +30,7 @@ public class Invoice {
       // add volume credits
       volumeCredits += Math.max(perf.audience - 30, 0);
       // add extra credit for every ten comedy attendees
-      if ("comedy".equals(play.type)) volumeCredits += Math.floor(perf.audience / 5);
+      if (Type.comedy.equals(play.type)) volumeCredits += Math.floor(perf.audience / 5);
 
       // print line for this order
       result.append("  " + play.name + ": " + frmt.format(thisAmount) +" (" + perf.audience + " seats)\n");
