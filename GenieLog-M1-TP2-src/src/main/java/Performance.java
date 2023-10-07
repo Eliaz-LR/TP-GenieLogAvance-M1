@@ -8,13 +8,30 @@ public class Performance {
     this.audience = audience;
   }
 
-  protected float getPrix(){
+  protected Type getType(){
+    return this.pieceTh.type;
 
-    float thisAmount = 0;
+  }
+  /* Fonction getPrix, retourne un double (le prix de la performance)
+   * Si la pièce est une comédie: On paye initialement 400$ et on 
+   *                              rajoute 10$ par spectateur dès lors
+   *                              qu'ils sont plus de 30.
+   * Si la pièce est une tragédie: On paye initialement 300$ et 
+   *                              et 3*le nombre de spectateur. Puis
+   *                              on ajoute 100 si le nombre de spect.
+   *                              est supérieur à 20, de manière analogue
+   *                              on ajoute 5€ pour chaque spect au dessus
+   *                              de 20€
+   * 
+   * On retourne le montant à payer en sortie.
+   */
 
-    var typePiece = this.pieceTh.type;
+  protected double getPrix(){
 
-    switch (typePiece) {
+    double thisAmount = 0;
+
+    switch (this.getType()) {
+      
       case tragedy:
         thisAmount = 400;
         if (this.audience > 30) {
@@ -23,18 +40,12 @@ public class Performance {
         break;
 
       case comedy:
-        thisAmount = 300; 
-        thisAmount += 3 * this.audience;
+        thisAmount = 300 + 3 * this.audience;
         if (this.audience > 20) {
           thisAmount += 100 + 5 * (this.audience - 20);
         }
-        
-        break;
-
-      default:
-        throw new Error("unknown type: ${play.type}");
-      }
-
+        break;    
+    }
       return thisAmount;
   }
 }
