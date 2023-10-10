@@ -8,6 +8,7 @@ public class Performance {
     this.play = play;
     this.audience = audience;
 
+    // calculate "amount"
     switch (play.type) {
       case TRAGEDY:
         amount = 400;

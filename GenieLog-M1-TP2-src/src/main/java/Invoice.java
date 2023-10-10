@@ -11,15 +11,15 @@ public class Invoice {
     this.customer = customer;
     this.performances = performances;
 
+    // calculate "total amount" and "volume credits"
     for (Performance perf : performances) {
       Play play = perf.play;
-      // add volume credits
       volumeCredits += Math.max(perf.audience - 30, 0);
       // add extra credit for every ten comedy attendees
-      if (play.type == Play.PlayType.COMEDY) volumeCredits +=
-        Math.floor(perf.audience / 5);
+      if (play.type == Play.PlayType.COMEDY) {
+        volumeCredits += Math.floor(perf.audience / 5);
+      }
 
-      // print line for this order
       totalAmount += perf.amount;
     }
   }
