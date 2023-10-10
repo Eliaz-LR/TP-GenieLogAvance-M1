@@ -4,15 +4,12 @@ public class Invoice {
 
   public String customer;
   public List<Performance> performances;
-  public float totalAmount;
-  public int volumeCredits;
+  public float totalAmount = 0;
+  public int volumeCredits = 0;
 
   public Invoice(String customer, List<Performance> performances) {
     this.customer = customer;
     this.performances = performances;
-
-    totalAmount = 0;
-    volumeCredits = 0;
 
     for (Performance perf : performances) {
       Play play = perf.play;

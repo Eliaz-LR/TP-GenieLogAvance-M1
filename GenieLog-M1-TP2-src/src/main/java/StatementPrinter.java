@@ -12,12 +12,10 @@ public class StatementPrinter {
     NumberFormat frmt = NumberFormat.getCurrencyInstance(Locale.US);
 
     for (Performance perf : invoice.performances) {
-      Play play = perf.play;
-      // print line for this order
       buffer.append(
         String.format(
           "  %s: %s (%s seats)\n",
-          play.name,
+          perf.play.name,
           frmt.format(perf.amount),
           perf.audience
         )
