@@ -34,6 +34,7 @@ public class StatementPrinterTests {
     );
 
     StatementPrinter statementPrinter = new StatementPrinter();
-    System.out.println(statementPrinter.toHtml(invoice));
+    var result = statementPrinter.toHtml(invoice);
+    verify(result);
   }
 }
