@@ -2,8 +2,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
 import static org.approvaltests.Approvals.verify;
 
@@ -27,7 +27,7 @@ public class StatementPrinterTests {
                 new Performance(plays.get("othello"), 40)));
 
         StringBuffer statementPrinter = new StringBuffer();
-        statementPrinter.append(invoice.print());
+        statementPrinter.append(invoice.printText());
 
         verify(statementPrinter);
     }

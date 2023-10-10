@@ -1,0 +1,53 @@
+/*Style balise */
+
+table, td {
+
+    border: 1px solid #333;
+}
+
+th {
+    font-size: 1.5em;
+}
+
+td {
+    font-size: 1.2em;
+    text-align: center;
+}
+
+/*Style classe */
+
+.categorie{
+
+    font-weight: bold;
+
+}
+
+.endTab {
+
+    font-weight: bold;
+    text-align: right;
+}
+
+/*Style ID */
+
+#title {
+    font-size:2em;
+    font-weight: bold;
+}
+
+#list {
+    font-size:1.5em;
+    
+}
+
+#bold {
+    font-weight:bold;
+}
+
+
+#endMsg {
+
+    font-weight:normal;
+    font-style:italic;
+    font-size:1.1em;
+}
