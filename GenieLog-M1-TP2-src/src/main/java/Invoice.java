@@ -9,4 +9,8 @@ public class Invoice {
     this.customer = customer;
     this.performances = performances;
   }
+
+  public String getCustomer() {
+    return customer;
+  }
 }

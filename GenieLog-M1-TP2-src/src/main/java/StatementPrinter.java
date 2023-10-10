@@ -1,9 +1,11 @@
+import freemarker.template.*;
+import java.io.StringWriter;
 import java.text.NumberFormat;
 import java.util.*;
 
 public class StatementPrinter {
 
-  public String print(Invoice invoice, HashMap<String, Play> plays) {
+  public String toText(Invoice invoice, HashMap<String, Play> plays) {
     // amount of money for this order
     float totalAmount = 0;
     int volumeCredits = 0;
@@ -58,5 +60,28 @@ public class StatementPrinter {
     );
     buffer.append(String.format("You earned %s credits\n", volumeCredits));
     return buffer.toString();
+  }
+
+  public String toHtml(Invoice invoice, HashMap<String, Play> plays) {
+    try {
+      Configuration cfg = new Configuration(Configuration.VERSION_2_3_30);
+      cfg.setClassForTemplateLoading(StatementPrinter.class, "/views");
+      cfg.setDefaultEncoding("UTF-8");
+      cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+
+      Template template = cfg.getTemplate("statement.ftlh");
+
+      /* Create a data-model */
+      Map<String, Object> root = new HashMap<>();
+      root.put("invoice", invoice);
+      root.put("plays", plays);
+
+      StringWriter writer = new StringWriter();
+      template.process(root, writer);
+      return writer.toString();
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
   }
 }
