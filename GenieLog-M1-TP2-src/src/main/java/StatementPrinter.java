@@ -36,6 +36,7 @@ public class StatementPrinter {
       cfg.setClassForTemplateLoading(StatementPrinter.class, "/views");
       cfg.setDefaultEncoding("UTF-8");
       cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+      cfg.setLocale(Locale.FRANCE);
 
       Template template = cfg.getTemplate("statement.ftlh");
 
@@ -44,6 +45,7 @@ public class StatementPrinter {
       root.put("invoice", invoice);
 
       StringWriter writer = new StringWriter();
+      template.setOutputEncoding("UTF-8");
       template.process(root, writer);
       return writer.toString();
     } catch (Exception e) {

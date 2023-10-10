@@ -35,4 +35,8 @@ public class Performance {
   public int getAudience() {
     return audience;
   }
+
+  public float getAmount() {
+    return amount;
+  }
 }

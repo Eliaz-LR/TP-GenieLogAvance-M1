@@ -13,9 +13,9 @@
             <th colspan="4"> Invoice Table </th>
         </tr>
         <tr>
-            <td class = "categorie">Piece</td>
-            <td class = "categorie">Seats sold</td>
-            <td class = "categorie">Price</td>
+            <td class="categorie">Piece</td>
+            <td class="categorie">Seats sold</td>
+            <td class="categorie">Price</td>
         </tr>
     </thead>
     <tbody>
@@ -23,16 +23,16 @@
         <tr>
             <td>${performance.play.name}</td>
             <td>${performance.audience}</td>
-            <td>$650.00</td>
+            <td>${performance.amount?string.currency}</td>
         </tr>
         </#list>
         <tr>
-            <td class="endTab", colspan="2">Total owed:</td>
-            <td >$1,730.00</td>
+            <td class="endTab" colspan="2">Total owed:</td>
+            <td >${invoice.totalAmount?string.currency}</td>
         </tr>
         <tr>
-            <td class="endTab", colspan="2">Fidelity points earned: </td>
-            <td >47</td>
+            <td class="endTab" colspan="2">Fidelity points earned: </td>
+            <td >${invoice.volumeCredits}</td>
         </tr>
     </tbody>
   </table>

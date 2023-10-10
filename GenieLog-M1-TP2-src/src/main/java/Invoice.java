@@ -31,4 +31,12 @@ public class Invoice {
   public List<Performance> getPerformances() {
     return performances;
   }
+
+  public float getTotalAmount() {
+    return totalAmount;
+  }
+
+  public int getVolumeCredits() {
+    return volumeCredits;
+  }
 }
