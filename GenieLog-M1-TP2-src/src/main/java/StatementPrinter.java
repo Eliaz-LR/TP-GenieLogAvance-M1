@@ -6,10 +6,6 @@ import java.util.*;
 public class StatementPrinter {
 
   public String toText(Invoice invoice) {
-    // amount of money for this order
-    float totalAmount = 0;
-    int volumeCredits = 0;
-
     StringBuffer buffer = new StringBuffer();
     buffer.append(String.format("Statement for %s\n", invoice.customer));
 
@@ -17,48 +13,22 @@ public class StatementPrinter {
 
     for (Performance perf : invoice.performances) {
       Play play = perf.play;
-      // amount of money for this performance
-      float thisAmount = 0;
-
-      switch (play.type) {
-        case TRAGEDY:
-          thisAmount = 400;
-          if (perf.audience > 30) {
-            thisAmount += 10 * (perf.audience - 30);
-          }
-          break;
-        case COMEDY:
-          thisAmount = 300;
-          if (perf.audience > 20) {
-            thisAmount += 100 + 5 * (perf.audience - 20);
-          }
-          thisAmount += 3 * perf.audience;
-          break;
-        default:
-          throw new Error("unknown type: ${play.type}");
-      }
-
-      // add volume credits
-      volumeCredits += Math.max(perf.audience - 30, 0);
-      // add extra credit for every ten comedy attendees
-      if (play.type == Play.PlayType.COMEDY) volumeCredits +=
-        Math.floor(perf.audience / 5);
-
       // print line for this order
       buffer.append(
         String.format(
           "  %s: %s (%s seats)\n",
           play.name,
-          frmt.format(thisAmount),
+          frmt.format(perf.amount),
           perf.audience
         )
       );
-      totalAmount += thisAmount;
     }
     buffer.append(
-      String.format("Amount owed is %s\n", frmt.format(totalAmount))
+      String.format("Amount owed is %s\n", frmt.format(invoice.totalAmount))
     );
-    buffer.append(String.format("You earned %s credits\n", volumeCredits));
+    buffer.append(
+      String.format("You earned %s credits\n", invoice.volumeCredits)
+    );
     return buffer.toString();
   }
 
