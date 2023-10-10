@@ -5,7 +5,7 @@ import java.util.*;
 
 public class StatementPrinter {
 
-  public String toText(Invoice invoice, HashMap<String, Play> plays) {
+  public String toText(Invoice invoice) {
     // amount of money for this order
     float totalAmount = 0;
     int volumeCredits = 0;
@@ -16,7 +16,7 @@ public class StatementPrinter {
     NumberFormat frmt = NumberFormat.getCurrencyInstance(Locale.US);
 
     for (Performance perf : invoice.performances) {
-      Play play = plays.get(perf.playID);
+      Play play = perf.play;
       // amount of money for this performance
       float thisAmount = 0;
 
@@ -62,7 +62,7 @@ public class StatementPrinter {
     return buffer.toString();
   }
 
-  public String toHtml(Invoice invoice, HashMap<String, Play> plays) {
+  public String toHtml(Invoice invoice) {
     try {
       Configuration cfg = new Configuration(Configuration.VERSION_2_3_30);
       cfg.setClassForTemplateLoading(StatementPrinter.class, "/views");
@@ -74,7 +74,6 @@ public class StatementPrinter {
       /* Create a data-model */
       Map<String, Object> root = new HashMap<>();
       root.put("invoice", invoice);
-      root.put("plays", plays);
 
       StringWriter writer = new StringWriter();
       template.process(root, writer);
