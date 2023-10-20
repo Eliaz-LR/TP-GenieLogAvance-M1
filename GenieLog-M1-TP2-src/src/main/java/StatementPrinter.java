@@ -1,49 +1,59 @@
+import freemarker.template.*;
+import java.io.StringWriter;
 import java.text.NumberFormat;
 import java.util.*;
 
 public class StatementPrinter {
 
-  public String print(Invoice invoice, HashMap<String, Play> plays) {
-    int totalAmount = 0;
-    int volumeCredits = 0;
-    String result = String.format("Statement for %s\n", invoice.customer);
+  public String toText(Invoice invoice) {
+    StringBuffer buffer = new StringBuffer();
+    buffer.append(String.format("Statement for %s\n", invoice.customer));
 
     NumberFormat frmt = NumberFormat.getCurrencyInstance(Locale.US);
 
     for (Performance perf : invoice.performances) {
-      Play play = plays.get(perf.playID);
-      int thisAmount = 0;
-
-      switch (play.type) {
-        case "tragedy":
-          thisAmount = 40000;
-          if (perf.audience > 30) {
-            thisAmount += 1000 * (perf.audience - 30);
-          }
-          break;
-        case "comedy":
-          thisAmount = 30000;
-          if (perf.audience > 20) {
-            thisAmount += 10000 + 500 * (perf.audience - 20);
-          }
-          thisAmount += 300 * perf.audience;
-          break;
-        default:
-          throw new Error("unknown type: ${play.type}");
-      }
-
-      // add volume credits
-      volumeCredits += Math.max(perf.audience - 30, 0);
-      // add extra credit for every ten comedy attendees
-      if ("comedy".equals(play.type)) volumeCredits += Math.floor(perf.audience / 5);
-
-      // print line for this order
-      result += String.format("  %s: %s (%s seats)\n", play.name, frmt.format(thisAmount / 100), perf.audience);
-      totalAmount += thisAmount;
+      buffer.append(
+        String.format(
+          "  %s: %s (%s seats)\n",
+          perf.play.name,
+          frmt.format(perf.amount),
+          perf.audience
+        )
+      );
     }
-    result += String.format("Amount owed is %s\n", frmt.format(totalAmount / 100));
-    result += String.format("You earned %s credits\n", volumeCredits);
-    return result;
+    buffer.append(
+      String.format("Amount owed is %s\n", frmt.format(invoice.totalAmount))
+    );
+    buffer.append(
+      String.format("You earned %s credits\n", invoice.volumeCredits)
+    );
+    buffer.append(
+      String.format("You now have %s credits\n", invoice.customer.credit)
+    );
+    return buffer.toString();
   }
 
+  public String toHtml(Invoice invoice) {
+    try {
+      Configuration cfg = new Configuration(Configuration.VERSION_2_3_30);
+      cfg.setClassForTemplateLoading(StatementPrinter.class, "/views");
+      cfg.setDefaultEncoding("UTF-8");
+      cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+      cfg.setLocale(Locale.FRANCE);
+
+      Template template = cfg.getTemplate("statement.ftlh");
+
+      /* Create a data-model */
+      Map<String, Object> root = new HashMap<>();
+      root.put("invoice", invoice);
+
+      StringWriter writer = new StringWriter();
+      template.setOutputEncoding("UTF-8");
+      template.process(root, writer);
+      return writer.toString();
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
 }

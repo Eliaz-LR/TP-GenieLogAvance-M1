@@ -1,47 +1,72 @@
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import static org.approvaltests.Approvals.verify;
+
+import java.util.List;
+import org.junit.jupiter.api.Test;
 
 public class StatementPrinterTests {
 
-    @Test
-    void exampleStatement() {
+  @Test
+  void exampleStatement() {
+    Customer customer = new Customer("BigCo");
+    Invoice invoice = new Invoice(
+      customer,
+      List.of(
+        new Performance(new Play("Hamlet", Play.PlayType.TRAGEDY), 55),
+        new Performance(new Play("As You Like It", Play.PlayType.COMEDY), 35),
+        new Performance(new Play("Othello", Play.PlayType.TRAGEDY), 40)
+      )
+    );
 
-        HashMap<String, Play> plays = new HashMap<>();
-        plays.put("hamlet",  new Play("Hamlet", "tragedy"));
-        plays.put("as-like",  new Play("As You Like It", "comedy"));
-        plays.put("othello",  new Play("Othello", "tragedy"));
+    StatementPrinter statementPrinter = new StatementPrinter();
+    var result = statementPrinter.toText(invoice);
 
-        Invoice invoice = new Invoice("BigCo", List.of(
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40)));
+    verify(result);
+  }
 
-        StatementPrinter statementPrinter = new StatementPrinter();
-        var result = statementPrinter.print(invoice, plays);
+  @Test
+  void htmlStatement() {
+    Customer customer = new Customer("BigCo");
+    Invoice invoice = new Invoice(
+      customer,
+      List.of(
+        new Performance(new Play("Hamlet", Play.PlayType.TRAGEDY), 55),
+        new Performance(new Play("As You Like It", Play.PlayType.COMEDY), 35),
+        new Performance(new Play("Othello", Play.PlayType.TRAGEDY), 40)
+      )
+    );
 
-        verify(result);
-    }
+    StatementPrinter statementPrinter = new StatementPrinter();
+    var result = statementPrinter.toHtml(invoice);
+    verify(result);
+  }
 
-    @Test
-    void statementWithNewPlayTypes() {
+  @Test
+  void testCustomerFidelityreduction() {
+    Customer customer = new Customer("Good Customer");
+    new Invoice(
+      customer,
+      List.of(
+        new Performance(new Play("Hamlet", Play.PlayType.TRAGEDY), 155),
+        new Performance(new Play("As You Like It", Play.PlayType.COMEDY), 35),
+        new Performance(new Play("Othello", Play.PlayType.TRAGEDY), 60)
+      )
+    );
 
-        HashMap<String, Play> plays = new HashMap<>();
-        plays.put("henry-v",  new Play("Henry V", "history"));
-        plays.put("as-like",  new Play("As You Like It", "pastoral"));
+    // Good customer should now have +167 credits resulting in 15€ reduction for the next invoice
+    System.out.println(
+      "Number of credits after first order : " + customer.credit
+    );
 
-        Invoice invoice = new Invoice("BigCo", List.of(
-                new Performance("henry-v", 53),
-                new Performance("as-like", 55)));
-
-        StatementPrinter statementPrinter = new StatementPrinter();
-        Assertions.assertThrows(Error.class, () -> {
-            statementPrinter.print(invoice, plays);
-        });
-    }
+    Invoice invoice2 = new Invoice(
+      customer,
+      List.of(
+        new Performance(new Play("Hamlet", Play.PlayType.TRAGEDY), 55),
+        new Performance(new Play("As You Like It", Play.PlayType.COMEDY), 35),
+        new Performance(new Play("Othello", Play.PlayType.TRAGEDY), 40)
+      )
+    );
+    StatementPrinter statementPrinter = new StatementPrinter();
+    var result2 = statementPrinter.toText(invoice2);
+    verify(result2);
+  }
 }
