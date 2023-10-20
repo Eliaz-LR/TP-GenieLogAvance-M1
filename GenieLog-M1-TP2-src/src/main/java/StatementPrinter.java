@@ -27,6 +27,9 @@ public class StatementPrinter {
     buffer.append(
       String.format("You earned %s credits\n", invoice.volumeCredits)
     );
+    buffer.append(
+      String.format("You now have %s credits\n", invoice.customer.credit)
+    );
     return buffer.toString();
   }
 

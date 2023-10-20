@@ -4,3 +4,4 @@ Statement for Good Customer
   Othello: $500.00 (40 seats)
 Amount owed is $1,715.00
 You earned 47 credits
+You now have 64 credits

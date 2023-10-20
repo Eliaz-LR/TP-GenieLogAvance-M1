@@ -15,4 +15,8 @@ public class Customer {
   public String toString() {
     return name;
   }
+
+  public int getCredit() {
+    return credit;
+  }
 }

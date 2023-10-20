@@ -36,6 +36,7 @@
         </tr>
     </tbody>
   </table>
-  <p id="endMsg">Payment is required under 30 days.</p>
+  <p>You now have ${invoice.customer.credit} credits !</p>
+  <p>Payment is required under 30 days.</p>
 </body>
 </html>
