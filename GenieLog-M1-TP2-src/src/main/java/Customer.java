@@ -11,4 +11,8 @@ public class Customer {
     this.idNumber = UUID.randomUUID();
     this.credit = 0;
   }
+
+  public String toString() {
+    return name;
+  }
 }

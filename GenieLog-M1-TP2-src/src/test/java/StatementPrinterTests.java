@@ -7,8 +7,9 @@ public class StatementPrinterTests {
 
   @Test
   void exampleStatement() {
+    Customer customer = new Customer("BigCo");
     Invoice invoice = new Invoice(
-      "BigCo",
+      customer,
       List.of(
         new Performance(new Play("Hamlet", Play.PlayType.TRAGEDY), 55),
         new Performance(new Play("As You Like It", Play.PlayType.COMEDY), 35),
@@ -24,8 +25,9 @@ public class StatementPrinterTests {
 
   @Test
   void htmlStatement() {
+    Customer customer = new Customer("BigCo");
     Invoice invoice = new Invoice(
-      "BigCo",
+      customer,
       List.of(
         new Performance(new Play("Hamlet", Play.PlayType.TRAGEDY), 55),
         new Performance(new Play("As You Like It", Play.PlayType.COMEDY), 35),
