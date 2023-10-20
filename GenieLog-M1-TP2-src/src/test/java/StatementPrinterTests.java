@@ -32,5 +32,25 @@ public class StatementPrinterTests {
         verify(statementPrinter);
     }
 
+        @Test
+    void exampleStatementHTML() {
+
+    
+        
+        HashMap<String, Play> plays = new HashMap<>();
+        plays.put("hamlet",  new Play("Hamlet", Type.tragedy));
+        plays.put("as-like",  new Play("As You Like It", Type.comedy));
+        plays.put("othello",  new Play("Othello", Type.tragedy));
+        
+        Invoice invoice = new Invoice("BigCo", List.of(
+                new Performance(plays.get("hamlet"), 55),
+                new Performance(plays.get("as-like"), 35),
+                new Performance(plays.get("othello"), 40)));
+
+        StringBuffer statementPrinter = new StringBuffer();
+        statementPrinter.append(invoice.printToHTML());
+
+        verify(statementPrinter);
+    }
   
 }

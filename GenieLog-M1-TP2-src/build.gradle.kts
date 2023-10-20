@@ -11,7 +11,7 @@ repositories {
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
     testImplementation("com.approvaltests:approvaltests:15.6.0")
-    implementation("org.freemarker:freemarker:2.3.30")
+    implementation("org.freemarker:freemarker:2.3.20")
 }
 
 tasks.test {

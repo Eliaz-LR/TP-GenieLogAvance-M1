@@ -1,11 +1,17 @@
 import java.text.NumberFormat;
-import java.lang.StringBuffer;
-import java.lang.*;
+import java.io.File;
+import java.io.Writer;
+import java.io.OutputStreamWriter;
+import java.io.StringWriter;
+import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
-import java.util.*;
+
 
 public class Invoice {
 
@@ -17,6 +23,7 @@ public class Invoice {
     this.performances = performances;
   }
 
+  
 
   /* Fonction de création d'une facture (Version StringBuffer)
    * (StringBuffer) resultat : Facture sous forme de chaine de caractère. (retour)
@@ -43,14 +50,6 @@ public class Invoice {
       Play play = perf.pieceTh;
       double montantPiece = perf.getPrix();
 
-      Configuration configuration = new Configuration(Configuration.VERSION_2_3_30);
-      configuration.setClassForTemplateLoading(Invoice.class, "/templates");
-      configuration.setDefaultEncoding("UTF-8");
-      configuration.setLocale(Locale.FRANCE);
-      configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-
-
-
       // Ajout de crédits
       volumeCredits += Math.max(perf.audience - 30, 0);
       if (Type.comedy.equals(play.type)) volumeCredits += Math.floor(perf.audience / 5);
@@ -66,11 +65,59 @@ public class Invoice {
 
     return resultat;
   }
+  
+  protected String printToHTML() {
+    
+    Configuration configuration = new Configuration();
+    ClassTemplateLoader loader = new ClassTemplateLoader(Invoice.class, "/templates");
+    configuration.setClassForTemplateLoading(Invoice.class, "/templates");
+    configuration.setDefaultEncoding("UTF-8");
+    configuration.setLocale(Locale.FRANCE);
+    configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+    
+   
+    Map<String, Object> test = new HashMap<>();
+
+    NumberFormat frmt = NumberFormat.getCurrencyInstance(Locale.US);
+    double montantTotal = 0;
+    double montantPiece = 0;
+    int volumeCredits = 0;
+    StringBuffer perfs = new StringBuffer();
+
+    test.put("nameCompany", this.customer);
+
+    for(Performance perf : this.performances){
+      montantPiece = perf.getPrix();
+      Play play = perf.pieceTh;
+
+      perfs.append("<tr><td>" + perf.pieceTh.name + "</td><td>" + perf.audience + "</td><td>" + frmt.format(montantPiece) +"</td> </tr>");
+      
+      montantTotal += montantPiece;
+      volumeCredits += Math.max(perf.audience - 30, 0);
+      if (Type.comedy.equals(play.type)) volumeCredits += Math.floor(perf.audience / 5);
+
+    }
+    test.put("perf", perfs);
+    test.put("totalPrice", montantTotal);
+    test.put("totalPoints", volumeCredits);
+    
+    Writer out = new StringWriter();
 
 
+    try {
+      final Template temp = configuration.getTemplate("test.ftlh");
+      temp.process(test, out);
+      System.out.println(out);
+    }
+    catch(Exception e){
+      System.out.println("Template not found");
 
+    }
 
-}
+    return out.toString();
+  }
+  
+
 
 /* FONCTION printToHTML
  * On utilise cette série de commandes pour inverser la liste de performances
@@ -81,3 +128,5 @@ public class Invoice {
  *  -> On pourra intégrer plus facilement le code à l'aide de ça !
  *
  */
+
+ }
