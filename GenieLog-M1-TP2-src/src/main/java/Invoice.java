@@ -22,6 +22,14 @@ public class Invoice {
 
       totalAmount += perf.amount;
     }
+
+    // fidelity credits
+    while (customer.credit > 150 && totalAmount >= 15) {
+      customer.credit -= 150;
+      totalAmount -= 15;
+    }
+
+    customer.credit += volumeCredits;
   }
 
   public Customer getCustomer() {
